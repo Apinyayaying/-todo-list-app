@@ -1,0 +1,250 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 60px;
+  background: #ede4d3;
+  font-family: "Inter", -apple-system, "Segoe UI", Arial, sans-serif;
+  color: #3d3229;
+}
+
+.app {
+  background: #fbf7ef;
+  width: 100%;
+  max-width: 420px;
+  padding: 28px;
+  border-radius: 14px;
+  border: 1px solid #e2d5bf;
+  box-shadow: 0 6px 20px rgba(93, 74, 46, 0.08);
+}
+
+h1 {
+  font-size: 21px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  text-align: center;
+  color: #4a3b2a;
+  letter-spacing: -0.01em;
+}
+
+#task-form {
+  margin-bottom: 16px;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+#task-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #d8c8ac;
+  border-radius: 8px;
+  background: #fffdf9;
+  font-family: inherit;
+  font-size: 14px;
+  color: #3d3229;
+}
+
+#due-input {
+  padding: 10px 10px;
+  border: 1px solid #d8c8ac;
+  border-radius: 8px;
+  background: #fffdf9;
+  font-family: inherit;
+  font-size: 13px;
+  color: #3d3229;
+  width: 132px;
+}
+
+#due-input:focus,
+#task-input:focus {
+  outline: none;
+  border-color: #a9744f;
+}
+
+#task-input::placeholder {
+  color: #a89478;
+}
+
+#task-form button {
+  width: 100%;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #a9744f;
+  color: #fffdf9;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#task-form button:hover {
+  background: #8f5f3f;
+}
+
+.filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 7px 0;
+  border: 1px solid #d8c8ac;
+  background: #fffdf9;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #6b5c46;
+  transition: all 0.15s ease;
+}
+
+.filter-btn.active {
+  background: #6b6146;
+  color: #fffdf9;
+  border-color: #6b6146;
+}
+
+.progress-wrap {
+  height: 6px;
+  background: #ece2cd;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #7a8a5a;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+#task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 32px 8px;
+  color: #a89478;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+@keyframes taskIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes taskOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+    max-height: 60px;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(16px);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.task-enter {
+  animation: taskIn 0.25s ease both;
+}
+
+.task-exit {
+  animation: taskOut 0.2s ease forwards;
+  overflow: hidden;
+}
+
+#task-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 6px;
+  border-bottom: 1px solid #ece2cd;
+}
+
+#task-list li span {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 400;
+  word-break: break-word;
+  cursor: pointer;
+}
+
+#task-list li.completed span {
+  text-decoration: line-through;
+  color: #b0a288;
+}
+
+#task-list li button {
+  border: none;
+  background: transparent;
+  color: #b5654a;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+#task-list li button:hover {
+  opacity: 1;
+}
+
+.due-badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: #8a7d6d;
+  background: #ece2cd;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+#task-list li.overdue .due-badge {
+  color: #fffdf9;
+  background: #b5654a;
+}
+
+/* Priority accents */
+#task-list li.priority-high { border-left: 4px solid #b5654a; padding-left: 8px; }
+#task-list li.priority-medium { border-left: 4px solid #c99a4a; padding-left: 8px; }
+#task-list li.priority-low { border-left: 4px solid #7a8a5a; padding-left: 8px; }
+
+#task-count {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: #8a7d6d;
+  margin: 0;
+}
